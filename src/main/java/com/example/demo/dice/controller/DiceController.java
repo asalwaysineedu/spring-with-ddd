@@ -1,5 +1,6 @@
 package com.example.demo.dice.controller;
 
+import com.example.demo.dice.entity.Dice;
 import com.example.demo.dice.service.DiceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +22,9 @@ public class DiceController {
     }
 
     @GetMapping("/roll-dice")
-    public Integer rollDice() {
+    public Dice rollDice() {
         log.info("rollDice() called");
-        Integer acquiredDiceNumber = diceService.rollDice();
+        Dice acquiredDiceNumber = diceService.rollDice();
         return acquiredDiceNumber;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.dice.service;
 
+import com.example.demo.dice.entity.Dice;
 import com.example.demo.dice.repository.DiceRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +13,7 @@ public class DiceServiceImpl implements DiceService{
     final private DiceRepository diceRepository;
 
     @Override
-    public Integer rollDice() {
-        return null;
+    public Dice rollDice() {
+        return diceRepository.rollDice();
     }
 }

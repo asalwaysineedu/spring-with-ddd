@@ -1,5 +1,6 @@
 package com.example.demo.dice.repository;
 
+import com.example.demo.dice.entity.Dice;
 import org.springframework.stereotype.Repository;
 
 // Spring Beans
@@ -9,8 +10,19 @@ import org.springframework.stereotype.Repository;
 // 이거 싱글톤이니까 알아서 RequiredArgsConstructor가 인식하도록 만들어라 명령하는것임.
 @Repository
 public class DiceRepositoryImpl implements DiceRepository{
+    final int MIN = 1;
+    final int MAX = 6;
+
+    private int createdRandomNumber() {
+        int randomNumber = (int) (Math.random() * MAX) + MIN;
+        return randomNumber;
+    }
+
     @Override
-    public Integer rollDice() {
-        return null;
+    public Dice rollDice() {
+        int randomNumber = createdRandomNumber();
+        Dice dice = new Dice(randomNumber);
+
+        return dice;
     }
 }
