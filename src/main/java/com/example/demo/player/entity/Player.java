@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public class Player {
 
-    private int id;
+    private Long id;
     private String nickname;
 
-    public Player(int id, String nickname) {
+    public Player(Long id, String nickname) {
         this.id = id;
         this.nickname = nickname;
     }

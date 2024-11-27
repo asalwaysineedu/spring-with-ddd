@@ -20,7 +20,7 @@ public class PlayerRepositoryImpl implements PlayerRepository{
     public Player create() {
         // nickname을 타짜_0, 타짜_1, 타짜_2, .. 이런식으로 만든다고
         String nickname = playerNickname + ++playerCount;
-        Player player = new Player(playerCount, nickname);
+        Player player = new Player((long) playerCount, nickname);
 
         playerList.add(player);
 
@@ -37,7 +37,7 @@ public class PlayerRepositoryImpl implements PlayerRepository{
 
         for (String nickname : randomPlayerList) {
             playerList.add(
-                    new Player(++playerCount, nickname)
+                    new Player((long) ++playerCount, nickname)
             );
         }
         return playerList;
