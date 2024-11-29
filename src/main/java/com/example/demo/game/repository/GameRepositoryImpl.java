@@ -18,4 +18,10 @@ public class GameRepositoryImpl implements GameRepository{
         games.add(game);
         return game;
     }
+
+    @Override
+    public List<Game> getGameList() {
+        if (games.isEmpty()) throw new IllegalArgumentException("생성된 게임이 없습니다. 😅");
+        return games;
+    }
 }
