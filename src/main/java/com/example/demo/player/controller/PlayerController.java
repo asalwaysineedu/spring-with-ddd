@@ -24,8 +24,8 @@ public class PlayerController {
         return player;
     }
 
-    @PostMapping("/create-player/{maximum}")
-    public List<Player> createPlayerWithMaximum(@PathVariable("maximum") int maximum) {
+    @PostMapping("/create/tazza")
+    public List<Player> createPlayerWithMaximum(@RequestParam("maximum") int maximum) {
         return playerService.createRandomPlayerWithMaximumNumber(maximum);
     }
 }
