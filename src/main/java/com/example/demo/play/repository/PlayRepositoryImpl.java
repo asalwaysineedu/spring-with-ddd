@@ -14,4 +14,12 @@ public class PlayRepositoryImpl implements PlayRepository{
     public void savePlayHistory(Play playHistory) {
         diceGameResults.add(playHistory);
     }
+
+    @Override
+    public Play findByPlayId(Long playId) {
+        return diceGameResults.stream()
+                .filter(play -> play.getId().equals(playId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 게임 결과가 없습니다."));
+    }
 }

@@ -21,4 +21,9 @@ public class PlayController {
     public Play playDiceGame(@RequestBody PlayDiceGameRequestForm requestForm) {
         return playService.diceGame(requestForm.toPlayDiceGame());
     }
+
+    @GetMapping("/dice/winner/{playId}")
+    public String getDiceGameWinner(@PathVariable("playId") Long playId) {
+        return playService.getDiceGameWinner(playId);
+    }
 }

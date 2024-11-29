@@ -44,4 +44,20 @@ public class PlayServiceImpl implements PlayService{
         playRepository.savePlayHistory(playHistory);
         return playHistory;
     }
+
+    @Override
+    public String getDiceGameWinner(Long playId) {
+        Map<String, Integer> winner = new HashMap<>();
+        Play playHistory = playRepository.findByPlayId(playId);
+
+        for (PlayDiceGameResponse _result : playHistory.getResult()) {
+            final int totalDiceSum = _result.getDiceList().stream().mapToInt(Dice::getNumber).sum();
+            winner.put(_result.getPlayer(), totalDiceSum);
+        }
+
+        return winner.entrySet()
+                .stream()
+                .max(Comparator.comparing(Map.Entry::getValue))
+                .get().getKey();
+    }
 }

@@ -11,4 +11,6 @@ import java.util.Map;
 
 public interface PlayService {
     Play diceGame(PlayDiceGameRequest request);
+
+    String getDiceGameWinner(Long playId);
 }

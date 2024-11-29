@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PlayRepository {
     void savePlayHistory(Play playHistory);
+
+    Play findByPlayId(Long playId);
 }
