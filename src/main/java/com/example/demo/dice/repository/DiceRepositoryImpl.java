@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 public class DiceRepositoryImpl implements DiceRepository{
     final int MIN = 1;
     final int MAX = 6;
+    int id = 0;
 
     private int createdRandomNumber() {
         int randomNumber = (int) (Math.random() * MAX) + MIN;
@@ -21,7 +22,7 @@ public class DiceRepositoryImpl implements DiceRepository{
     @Override
     public Dice rollDice() {
         int randomNumber = createdRandomNumber();
-        Dice dice = new Dice(randomNumber);
+        Dice dice = new Dice((long) ++id, randomNumber);
 
         return dice;
     }
