@@ -23,4 +23,9 @@ public class PlayerServiceImpl implements PlayerService{
     public List<Player> createRandomPlayerWithMaximumNumber(int maximumNumber) {
         return playerRepository.createRandomPlayerWithMaximumNumber(maximumNumber);
     }
+
+    @Override
+    public List<Player> getPlayerList() {
+        return playerRepository.getPlayerList();
+    }
 }

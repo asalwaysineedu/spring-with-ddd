@@ -42,4 +42,10 @@ public class PlayerRepositoryImpl implements PlayerRepository{
         }
         return playerList;
     }
+
+    @Override
+    public List<Player> getPlayerList() {
+        if (playerList.isEmpty()) throw new IllegalArgumentException("생성된 플레이어가 없습니다. 생성해 주세요.");
+        return playerList;
+    }
 }

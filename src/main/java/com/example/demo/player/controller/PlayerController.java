@@ -1,5 +1,4 @@
 package com.example.demo.player.controller;
-
 import com.example.demo.player.entity.Player;
 import com.example.demo.player.service.PlayerService;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +26,10 @@ public class PlayerController {
     @PostMapping("/create/tazza")
     public List<Player> createPlayerWithMaximum(@RequestParam("maximum") int maximum) {
         return playerService.createRandomPlayerWithMaximumNumber(maximum);
+    }
+
+    @GetMapping("/list")
+    public List<Player> getPlayerList() {
+        return playerService.getPlayerList();
     }
 }
