@@ -2,10 +2,8 @@ package com.example.demo.game.service;
 
 import com.example.demo.game.entity.Game;
 import com.example.demo.game.service.request.GameCreateRequest;
-
-import java.util.List;
+import com.example.demo.game.service.response.GameCreateResponse;
 
 public interface GameService {
-    Game create(GameCreateRequest request);
-    List<Game> getGameList();
+    GameCreateResponse create(GameCreateRequest request);
 }

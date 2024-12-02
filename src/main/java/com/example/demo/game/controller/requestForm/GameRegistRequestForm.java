@@ -7,8 +7,8 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class GameCreateRequestForm {
-    private GameType type;
+public class GameRegistRequestForm {
+    final private GameType type;
 
     public GameCreateRequest toGameCreateRequest() {
         return new GameCreateRequest(type);
