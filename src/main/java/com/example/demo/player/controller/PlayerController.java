@@ -17,7 +17,7 @@ import java.util.List;
 public class PlayerController {
     final private PlayerService playerService;
 
-    @GetMapping("/create")
+    @PostMapping("/create")
     public PlayerRegistResponseForm create(@RequestBody PlayerRegistRequestForm form) {
         log.info("Player Create(): called");
         return PlayerRegistResponseForm.from(
