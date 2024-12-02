@@ -1,4 +1,7 @@
 package com.example.demo.player.controller;
+
+import com.example.demo.player.controller.requestForm.PlayerRegistRequestForm;
+import com.example.demo.player.controller.responseForm.PlayerRegistResponseForm;
 import com.example.demo.player.entity.Player;
 import com.example.demo.player.service.PlayerService;
 import lombok.RequiredArgsConstructor;
@@ -14,22 +17,10 @@ import java.util.List;
 public class PlayerController {
     final private PlayerService playerService;
 
-    @GetMapping("/create-player")
-    public Player createPlayer() {
-        log.info("createPlayer() called");
-
-        Player player = playerService.createPlayer();
-
-        return player;
-    }
-
-    @PostMapping("/create/tazza")
-    public List<Player> createPlayerWithMaximum(@RequestParam("maximum") int maximum) {
-        return playerService.createRandomPlayerWithMaximumNumber(maximum);
-    }
-
-    @GetMapping("/list")
-    public List<Player> getPlayerList() {
-        return playerService.getPlayerList();
+    @GetMapping("/create")
+    public PlayerRegistResponseForm create(@RequestBody PlayerRegistRequestForm form) {
+        log.info("Player Create(): called");
+        return PlayerRegistResponseForm.from(
+                playerService.createPlayer(form.toRegistPlayer()));
     }
 }
