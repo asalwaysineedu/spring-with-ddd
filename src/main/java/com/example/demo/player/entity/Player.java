@@ -18,4 +18,6 @@ public class Player extends BaseTimeEntity {
     public Player(String nickname) {
         this.nickname = nickname;
     }
+
+    public Player() {}
 }

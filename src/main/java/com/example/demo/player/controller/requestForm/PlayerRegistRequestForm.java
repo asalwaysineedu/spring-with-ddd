@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 public class PlayerRegistRequestForm {
     final private String nickname;
 
-    public PlayerRegistRequest toRegistPlayer() {
+    public PlayerRegistRequest toRegistPlayerRequest() {
         return new PlayerRegistRequest(nickname);
     }
 }
