@@ -1,10 +1,12 @@
 package com.example.demo.dice.controller;
 
-import com.example.demo.dice.entity.Dice;
+import com.example.demo.dice.controller.requestForm.DiceRegistRequestForm;
+import com.example.demo.dice.controller.responseForm.DiceRegistResponseForm;
 import com.example.demo.dice.service.DiceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,16 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class DiceController {
     final private DiceService diceService;
 
-    @GetMapping("/test")
-    public String diceTest() {
-        log.info("diceTest() called");
-        return "diceTest()";
-    }
-
     @GetMapping("/roll-dice")
-    public Dice rollDice() {
+    public DiceRegistResponseForm rollDice(@RequestBody DiceRegistRequestForm form) {
         log.info("rollDice() called");
-        Dice acquiredDiceNumber = diceService.rollDice();
-        return acquiredDiceNumber;
+        return DiceRegistResponseForm.from(
+                diceService.rollDice(form.toDiceRegistRequest()));
     }
 }

@@ -1,10 +1,8 @@
 package com.example.demo.dice.service;
 
-import com.example.demo.dice.entity.Dice;
-
-import java.util.List;
+import com.example.demo.dice.service.request.DiceRegistRequest;
+import com.example.demo.dice.service.response.DiceRegistResponse;
 
 public interface DiceService {
-    Dice rollDice();
-    List<Dice> rollDiceWithMaximumChance(int chance);
+    DiceRegistResponse rollDice(DiceRegistRequest request);
 }
