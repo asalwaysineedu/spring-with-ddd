@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -22,5 +25,15 @@ public class DiceServiceImpl implements DiceService{
         final Dice savedDice = diceRepository.save(request.toDice(randomNumber));
 
         return DiceRegistResponse.from(savedDice);
+    }
+
+    @Override
+    public List<DiceRegistResponse> rollDiceWithMaximumChance(int maximumChance, Long playerId) {
+        List<DiceRegistResponse> diceRegistResponseList = new ArrayList<>();
+        for (int i = 0; i < maximumChance; i++) {
+            diceRegistResponseList.add(
+                    rollDice(new DiceRegistRequest(playerId)));
+        }
+        return diceRegistResponseList;
     }
 }

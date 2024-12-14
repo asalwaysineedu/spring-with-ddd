@@ -10,5 +10,7 @@ import java.util.List;
 
 public interface PlayerService {
     PlayerRegistResponse createPlayer(PlayerRegistRequest request);
+
+    List<Player> findAllByPlayerIdList(List<Long> playerIdList);
     PlayerListResponse list(PlayerFindRequest findPlayerRequest);
 }

@@ -1,11 +1,7 @@
 package com.example.demo.play.repository;
 
 import com.example.demo.play.entity.Play;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface PlayRepository {
-    void savePlayHistory(Play playHistory);
-
-    Play findByPlayId(Long playId);
+public interface PlayRepository extends JpaRepository<Play, Long> {
 }

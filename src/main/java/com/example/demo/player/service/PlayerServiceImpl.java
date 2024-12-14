@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -22,6 +24,11 @@ public class PlayerServiceImpl implements PlayerService{
     public PlayerRegistResponse createPlayer(PlayerRegistRequest request) {
         final Player savedPlayer = playerRepository.save(request.toPlayer());
         return new PlayerRegistResponse(savedPlayer.getNickname());
+    }
+
+    @Override
+    public List<Player> findAllByPlayerIdList(List<Long> playerIdList) {
+        return playerRepository.findAllById(playerIdList);
     }
 
     @Override
