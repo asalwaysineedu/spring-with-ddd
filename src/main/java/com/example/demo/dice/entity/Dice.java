@@ -1,17 +1,25 @@
 package com.example.demo.dice.entity;
 
+import com.example.demo.common.BaseTimeEntity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Getter;
 
-// Entity안에 상태 값을 배치함.
-// 이 상태 값을 획득하고 싶을 때 사용하는 것이 Getter
-// @Getter 를 사용하여 getNumber() 메서드(함수)가 자동으로 생성됨.
+@Entity
 @Getter
-public class Dice {
+public class Dice extends BaseTimeEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long playerId;
     private int number;
 
-    public Dice(Long id, int number) {
-        this.id = id;
+    public Dice(int number, Long playerId) {
+        this.playerId = playerId;
         this.number = number;
     }
+
+    public Dice() {}
 }

@@ -1,20 +1,20 @@
-package com.example.demo.play.controller.requestForm;
+package com.example.demo.play.controller.request;
 
 import com.example.demo.game.entity.GameType;
 import com.example.demo.play.service.request.PlayDiceGameRequest;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PlayDiceGameRequestForm {
-    final private int maximumPlayer;
+    final private Long playerId;
     final private int maximumChance;
     final private GameType gameType;
 
     public PlayDiceGameRequest toPlayDiceGame() {
         return new PlayDiceGameRequest(
-                maximumPlayer, maximumChance, gameType
+                playerId, maximumChance, gameType
         );
     }
 }

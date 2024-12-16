@@ -2,62 +2,52 @@ package com.example.demo.play.service;
 
 import com.example.demo.dice.entity.Dice;
 import com.example.demo.dice.service.DiceService;
-import com.example.demo.game.entity.Game;
-import com.example.demo.game.repository.GameRepository;
+import com.example.demo.dice.service.response.DiceRegistResponse;
+import com.example.demo.play.controller.request.PlayDiceGameWinnerRequestForm;
 import com.example.demo.play.entity.Play;
 import com.example.demo.play.repository.PlayRepository;
 import com.example.demo.play.service.request.PlayDiceGameRequest;
+import com.example.demo.play.service.request.PlayDiceGameWinnerRequest;
 import com.example.demo.play.service.response.PlayDiceGameResponse;
 import com.example.demo.player.entity.Player;
-import com.example.demo.player.service.PlayerService;
+import com.example.demo.player.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class PlayServiceImpl implements PlayService{
-    final private GameRepository gameRepository;
     final private PlayRepository playRepository;
-    final private PlayerService playerService;
+    final private PlayerRepository playerRepository;
     final private DiceService diceService;
 
-    int id = 0;
-
     @Override
-    public Play diceGame(PlayDiceGameRequest request) {
-        final Game game = gameRepository.getGame(request.getGameType());
+    public PlayDiceGameResponse playDiceGame(PlayDiceGameRequest request) {
+        final Player savedPlayer = playerRepository.findById(request.getPlayerId()).orElseThrow(() -> new IllegalArgumentException("해당 플레이어는 없습니다."));
+        final List<DiceRegistResponse> diceList = diceService.rollDiceWithMaximumChance(request.getMaximumChance(), request.getPlayerId());
+        final List<Long> diceIdList = diceList.stream().map(DiceRegistResponse::getId).toList();
+        final Play savedPlay = playRepository.save(request.toPlay(savedPlayer, diceIdList));
 
-        List<PlayDiceGameResponse> result = new ArrayList<>();
-        List<Player> players = playerService.getPlayerList();
-
-        for (Player player : players) {
-            List<Dice> diceResults = diceService.rollDiceWithMaximumChance(request.getMaximumChance());
-            PlayDiceGameResponse _result = new PlayDiceGameResponse(player.getNickname(), diceResults);
-            result.add(_result);
-        }
-
-        Play playHistory = new Play((long) ++id, game, result);
-        playRepository.savePlayHistory(playHistory);
-        return playHistory;
+        return PlayDiceGameResponse.from(savedPlay, savedPlayer, diceList);
     }
 
     @Override
-    public String getDiceGameWinner(Long playId) {
-        Map<String, Integer> winner = new HashMap<>();
-        Play playHistory = playRepository.findByPlayId(playId);
+    public List<Play> list() {
+        return playRepository.findAll();
+    }
 
-        for (PlayDiceGameResponse _result : playHistory.getResult()) {
-            final int totalDiceSum = _result.getDiceList().stream().mapToInt(Dice::getNumber).sum();
-            winner.put(_result.getPlayer(), totalDiceSum);
-        }
+    @Override
+    public String getDiceGameWinner(PlayDiceGameWinnerRequest request) {
+        final List<Play> playList = playRepository.findAllById(request.getPlayIdList());
 
-        return winner.entrySet()
-                .stream()
-                .max(Comparator.comparing(Map.Entry::getValue))
-                .get().getKey();
+//        playList.stream().map(Dice::getNumber).;
+        return "";
     }
 }

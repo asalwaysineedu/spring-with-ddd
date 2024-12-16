@@ -1,16 +1,17 @@
 package com.example.demo.play.service;
 
-import com.example.demo.dice.entity.Dice;
+import com.example.demo.play.controller.request.PlayDiceGameWinnerRequestForm;
 import com.example.demo.play.entity.Play;
 import com.example.demo.play.service.request.PlayDiceGameRequest;
+import com.example.demo.play.service.request.PlayDiceGameWinnerRequest;
 import com.example.demo.play.service.response.PlayDiceGameResponse;
-import com.example.demo.player.entity.Player;
 
 import java.util.List;
-import java.util.Map;
 
 public interface PlayService {
-    Play diceGame(PlayDiceGameRequest request);
+    PlayDiceGameResponse playDiceGame(PlayDiceGameRequest playDiceGame);
 
-    String getDiceGameWinner(Long playId);
+    List<Play> list();
+
+    String getDiceGameWinner(PlayDiceGameWinnerRequest playDiceGameWinnerRequest);
 }

@@ -1,9 +1,10 @@
 package com.example.demo.play.controller;
 
-import com.example.demo.play.controller.requestForm.PlayDiceGameRequestForm;
+import com.example.demo.play.controller.request.PlayDiceGameRequestForm;
+import com.example.demo.play.controller.request.PlayDiceGameWinnerRequestForm;
+import com.example.demo.play.controller.response.PlayDiceGameResponseForm;
 import com.example.demo.play.entity.Play;
 import com.example.demo.play.service.PlayService;
-import com.example.demo.play.service.response.PlayDiceGameResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -17,13 +18,18 @@ import java.util.List;
 public class PlayController {
     final private PlayService playService;
 
-    @GetMapping("/dice")
-    public Play playDiceGame(@RequestBody PlayDiceGameRequestForm requestForm) {
-        return playService.diceGame(requestForm.toPlayDiceGame());
+    @PostMapping("/dice")
+    public PlayDiceGameResponseForm playDiceGame(@RequestBody PlayDiceGameRequestForm form) {
+        return PlayDiceGameResponseForm.from(playService.playDiceGame(form.toPlayDiceGame()));
     }
 
-    @GetMapping("/dice/winner/{playId}")
-    public String getDiceGameWinner(@PathVariable("playId") Long playId) {
-        return playService.getDiceGameWinner(playId);
+    @GetMapping("/list")
+    public List<Play> list() {
+        return playService.list();
+    }
+
+    @GetMapping("/dice/winner")
+    public String diceGameWinner(@RequestBody PlayDiceGameWinnerRequestForm form) {
+        return playService.getDiceGameWinner(form.toGetDiceGameWinner());
     }
 }
