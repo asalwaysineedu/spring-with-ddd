@@ -17,6 +17,10 @@ public class CardServiceImpl implements CardService {
     final private CardRepository cardRepository;
     final private CardIllustrationRepository cardIllustrationRepository;
 
+    @Override
+    public Card findById(Long cardId) {
+        return cardRepository.findById(cardId).orElseThrow(() -> new IllegalArgumentException("존재하는 카드가 아닙니다."));
+    }
 
     @Override
     public CardCreateResponse create(CardCreateRequest request) {
