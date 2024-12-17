@@ -5,5 +5,6 @@ import com.example.demo.heartStone.illustration.service.request.IllustrationCrea
 import com.example.demo.heartStone.illustration.service.response.IllustrationCreateResponse;
 
 public interface IllustrationService {
+    Illustration findById(Long illustrationId);
     IllustrationCreateResponse create(IllustrationCreateRequest illustrationCreateRequest);
 }
